@@ -472,113 +472,123 @@ function normalizarDatos() {
 prompt = require('prompt-sync')();
 
 function menuPrincipal() {
-    let salir = false;
-  
-    while (!salir) {
-      const opcion = prompt(
-        "📚 Bienvenido a LibroManía – Menú Principal\n" +
-        "Elegí una opción:\n\n" +
-        "1. Agregar nuevo libro\n" +
-        "2. Buscar libro\n" +
-        "3. Ordenar libros\n" +
-        "4. Borrar libro\n" +
-        "5. Registrar usuario\n" +
-        "6. Mostrar todos los usuarios\n" +
-        "7. Buscar usuario\n" +
-        "8. Borrar usuario\n" +
-        "9. Prestar libro\n" +
-        "10. Devolver libro\n" +
-        "11. Generar reporte de libros\n" +
-        "12. Libros con más de una palabra (solo letras)\n" +
-        "13. Calcular estadísticas\n" +
-        "14. Normalizar datos\n" +
-        "15. Salir 🚪"
-      );
-  
-      switch (opcion) {
-        case "1":
-          const id = parseInt(prompt("📘 ID del libro:"));
-          const titulo = prompt("📘 Título del libro:");
-          const autor = prompt("✍️ Autor del libro:");
-          const anio = parseInt(prompt("📅 Año de publicación:"));
-          const genero = prompt("📚 Género del libro:");
-          agregarLibro(id, titulo, autor, anio, genero);
+  let salir = false;
+
+  while (!salir) {
+    const opcion = prompt(
+      "📚 Bienvenido a BibliotecApp – Menú Principal\n" +
+      "Elegí una opción:\n\n" +
+      "1. Agregar nuevo libro\n" +
+      "2. Buscar libro\n" +
+      "3. Ordenar libros\n" +
+      "4. Borrar libro\n" +
+      "5. Registrar usuario\n" +
+      "6. Mostrar todos los usuarios\n" +
+      "7. Buscar usuario\n" +
+      "8. Borrar usuario\n" +
+      "9. Prestar libro\n" +
+      "10. Devolver libro\n" +
+      "11. Generar reporte de libros\n" +
+      "12. Libros con más de una palabra (solo letras)\n" +
+      "13. Calcular estadísticas\n" +
+      "14. Organizar datos\n" +
+      "15. Salir 🚪"
+    );
+
+    switch (opcion) {
+      case "1":
+        const id = parseInt(prompt("📘 ID del libro:"));
+        if (isNaN(id)) {
+          console.log("❌ El ID debe ser un número.");
           break;
-  
-        case "2":
-          const criterioBusqueda = prompt("🔍 Buscar por 'titulo', 'autor' o 'genero':");
-          const valorBusqueda = prompt(`🔍 Buscar valor en ${criterioBusqueda}:`);
-          buscarLibro(criterioBusqueda, valorBusqueda);
+        }
+        const titulo = prompt("📘 Título del libro:");
+        const autor = prompt("✍️ Autor del libro:");
+        const anio = parseInt(prompt("📅 Año de publicación:"));
+        if (isNaN(anio)) {
+          console.log("❌ El año debe ser un número.");
           break;
-  
-        case "3":
-          const criterioOrden = prompt("📑 Ordenar por 'titulo' o 'año':");
-          ordenarLibros(criterioOrden);
-          break;
-  
-        case "4":
-          const idBorrar = parseInt(prompt("🗑️ Borrar ID del libro:"));
-          borrarLibro(idBorrar);
-          break;
-  
-        case "5":
-          const nombreUsuario = prompt("👤 Nombre del usuario:");
-          const emailUsuario = prompt("📧 Email del usuario:");
-          registrarUsuario(nombreUsuario.trim(), emailUsuario.trim());
-          break;
-  
-        case "6":
-          mostrarTodosLosUsuarios();
-          break;
-  
-        case "7":
-          const emailBusqueda = prompt("🔍 Buscar email de usuario:");
-          buscarUsuario(emailBusqueda);
-          break;
-  
-        case "8":
-          const nombreBorrar = prompt("🧍 Borrar nombre de usuario:");
-          const emailBorrar = prompt("📧 Borrar email de usuario:");
-          borrarUsuario(nombreBorrar.trim(), emailBorrar.trim());
-          break;
-  
-        case "9":
-          const idLibroPrestamo = parseInt(prompt("📚 ID del libro a prestar:"));
-          const idUsuarioPrestamo = parseInt(prompt("👤 ID del usuario que lo toma prestado:"));
-          prestarLibro(idLibroPrestamo, idUsuarioPrestamo);
-          break;
-  
-        case "10":
-          const idLibroDevolver = parseInt(prompt("📚 ID del libro a devolver:"));
-          const idUsuarioDevolver = parseInt(prompt("👤 ID del usuario que lo devuelve:"));
-          devolverLibro(idLibroDevolver, idUsuarioDevolver);
-          break;
-  
-        case "11":
-          generarReporteLibros();
-          break;
-  
-        case "12":
-          librosConPalabrasEnTitulo();
-          break;
-  
-        case "13":
-          calcularEstadisticas();
-          break;
-  
-        case "14":
-          normalizarDatos();
-          break;
-  
-        case "15":
-          alert("👋 ¡Gracias por usar BibliotecApp!");
-          salir = true;
-          break;
-  
-        default:
-          alert("❌ Opción no válida. Intenta de nuevo.");
-          break;
-      }
+        }
+        const genero = prompt("📚 Género del libro:");
+        agregarLibro(id, titulo, autor, anio, genero);
+        break;
+
+      case "2":
+        const criterioBusqueda = prompt("🔍 Buscar por 'titulo', 'autor' o 'genero':");
+        const valorBusqueda = prompt(`🔍 Buscar valor en ${criterioBusqueda}:`);
+        buscarLibro(criterioBusqueda, valorBusqueda);
+        break;
+
+      case "3":
+        const criterioOrden = prompt("📑 Ordenar por 'titulo' o 'año':");
+        ordenarLibros(criterioOrden);
+        break;
+
+      case "4":
+        const idBorrar = parseInt(prompt("🗑️ Borrar ID del libro:"));
+        borrarLibro(idBorrar);
+        break;
+
+      case "5":
+        const nombreUsuario = prompt("👤 Nombre del usuario:");
+        const emailUsuario = prompt("📧 Email del usuario:");
+        registrarUsuario(nombreUsuario.trim(), emailUsuario.trim());
+        break;
+
+      case "6":
+        mostrarTodosLosUsuarios();
+        break;
+
+      case "7":
+        const emailBusqueda = prompt("🔍 Buscar email de usuario:");
+        buscarUsuario(emailBusqueda);
+        break;
+
+      case "8":
+        const nombreBorrar = prompt("🧍 Borrar nombre de usuario:");
+        const emailBorrar = prompt("📧 Borrar email de usuario:");
+        borrarUsuario(nombreBorrar.trim(), emailBorrar.trim());
+        break;
+
+      case "9":
+        const idLibroPrestamo = parseInt(prompt("📚 ID del libro a prestar:"));
+        const idUsuarioPrestamo = parseInt(prompt("👤 ID del usuario que lo toma prestado:"));
+        prestarLibro(idLibroPrestamo, idUsuarioPrestamo);
+        break;
+
+      case "10":
+        const idLibroDevolver = parseInt(prompt("📚 ID del libro a devolver:"));
+        const idUsuarioDevolver = parseInt(prompt("👤 ID del usuario que lo devuelve:"));
+        devolverLibro(idLibroDevolver, idUsuarioDevolver);
+        break;
+
+      case "11":
+        generarReporteLibros();
+        break;
+
+      case "12":
+        librosConPalabrasEnTitulo();
+        break;
+
+      case "13":
+        calcularEstadisticas();
+        break;
+
+      case "14":
+        normalizarDatos();
+        break;
+
+      case "15":
+        console.log("👋 ¡Gracias por usar BibliotecApp!");
+        salir = true;
+        break;
+
+      default:
+        console.log("❌ Opción no válida. Intenta de nuevo.");
+        break;
     }
   }
-  
+}
+  menuPrincipal();
+
+  // Y asi termina nuestra app de gestión de biblioteca digital, BibliotecApp.
